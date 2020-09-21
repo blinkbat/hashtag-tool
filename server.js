@@ -137,7 +137,10 @@ app.post( '/api/hashtags', ( req, res ) => {
 
   const scrapeIG = async () => {
 
-    const response = await scrapeIt( 
+    let response;
+
+    try {
+    response = await scrapeIt( 
 
         `https://www.instagram.com/explore/tags/${ req.body.term }/`, 
 
@@ -151,6 +154,7 @@ app.post( '/api/hashtags', ( req, res ) => {
         }
 
     );
+} catch( err ) { console.error( err ); }
 
     // parse body for #s
     const bigArr = findBySymbol( response.data.rows[0], '#' );
@@ -197,7 +201,7 @@ app.post( '/api/hashtags', ( req, res ) => {
   const finishUp = async () => {
 
     await scrapeBestHashtags();
-    await scrapeIG();
+    await scrapeIG().catch( err => console.error( err ) );
 
     console.log( hashtagObj );
 

@@ -7,11 +7,7 @@ router.route("/")
 
     ( req, res ) => {
 
-      const term = req.body.term;
-
-      console.log( term );
-
-      res.json( term );
+      res.json( 'test' );
 
     }
 

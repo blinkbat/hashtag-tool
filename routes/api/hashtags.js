@@ -1,14 +1,21 @@
 const router = require("express").Router();
 const booksController = require("../../controllers/booksController");
 
-// Matches with "/api/books"
+// Matches with /api/hashtags
 router.route("/")
-  .get(
+  .post(
 
     ( req, res ) => {
 
-      res.json( 'hashtags!' );
+      const term = req.body.term;
+
+      console.log( term );
+
+      res.json( term );
 
     }
 
   )
+
+  
+module.exports = router;

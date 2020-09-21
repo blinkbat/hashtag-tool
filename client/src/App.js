@@ -1,23 +1,34 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Books from "./pages/Books";
-import Detail from "./pages/Detail";
-import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
+import React, {useState} from "react";
+import axios from 'axios';
 
 function App() {
+
+  const [ searchTerm, setSearch ] = useState( '' );
+
   return (
-    <Router>
+    <div style={{ padding: '50px' }}> 
+
+      <h1>Top Hashtags Finder</h1>
+
+      <br /><br />
+
+      <input type="text" onChange={ e => setSearch( e.target.value ) } value={ searchTerm } />
+      <button onClick={ () => axios.post( 'localhost:3001/api/hashtags', { term: searchTerm } ) }>Search</button>
+
+      <br /><br />
       <div>
-        <Nav />
-        <Switch>
-          <Route exact path="/" component={Books} />
-          <Route exact path="/books" component={Books} />
-          <Route exact path="/books/:id" component={Detail} />
-          <Route component={NoMatch} />
-        </Switch>
+
+        <div style={{ width: '50%', display: 'inline-block' }}>
+          <h3>best-hashtags.com results</h3>
+        </div>
+
+        <div style={{ width: '50%', display: 'inline-block' }}>
+          <h3>instagram discovery results</h3>
+        </div>
+
       </div>
-    </Router>
+
+    </div>
   );
 }
 

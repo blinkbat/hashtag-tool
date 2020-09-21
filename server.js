@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require( 'cors' );
 const scrapeIt = require( 'scrape-it' );
+const path = require( 'path' );
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -207,6 +208,12 @@ app.post( '/api/hashtags', ( req, res ) => {
   finishUp();
 
 
+});
+
+
+// If no API routes are hit, send the React app
+app.use( function( req, res ) {
+  res.sendFile( path.join( __dirname, "../client/build/index.html" ) );
 });
 
 // Start the API server

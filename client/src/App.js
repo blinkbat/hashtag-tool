@@ -56,7 +56,7 @@ function App() {
           <ol>
           { results.data 
             ? results.data.ig.map( item => 
-                item[0] ? <li><strong>{ item[0] }</strong>: { item[1] }%</li>
+                item ? <li><strong>{ item[0] }</strong>: { item[1] }%</li>
                 : 'didn\'t work'
                ) 
             : results.msg
